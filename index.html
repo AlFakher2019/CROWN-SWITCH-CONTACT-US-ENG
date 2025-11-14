@@ -47,6 +47,7 @@
                                             </div>
                                             <div class="zf-clearBoth"></div>
                                         </div>
+                                        <p id="Name_First_error" class="zf-errorMessage" style="display:none;">Invalid value</p>
                                     </div>
                                     <div class="zfCol">
                                         <div class="zf-tempFrmWrapper zf-large">
@@ -62,10 +63,12 @@
                                             </div>
                                             <div class="zf-clearBoth"></div>
                                         </div>
+                                        <p id="Name_Last_error" class="zf-errorMessage" style="display:none;">Invalid value</p>
+                                            <div class="zf-clearBoth"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <p id="Name_error" class="zf-errorMessage" style="display:none;">Invalid value</p>
                         </div>
                         <div class="zf-clearBoth"></div>
                 </div>
@@ -161,7 +164,7 @@
                 </ul>
             </div>
             <ul>
-                <li class="zf-fmFooter"><button class="zf-submitColor">Submit</button></li>
+                <li class="zf-fmFooter"><button class="zf-submitColor" type="submit">Submit</button></li>
             </ul>
             
     </div>
@@ -178,7 +181,7 @@
             var fields = {
                 Name_First: {
                     el: $('[name="Name_First"]'),
-                    err: document.getElementById('Name_error'),
+                    err: document.getElementById('Name_First_error'),
                     required: true,
                     validate: function (value) {
                         if (!value.trim()) return 'First name is required.';
@@ -188,7 +191,7 @@
                 },
                 Name_Last: {
                     el: $('[name="Name_Last"]'),
-                    err: document.getElementById('Name_error'),
+                    err: document.getElementById('Name_Last_error'),
                     required: true,
                     validate: function (value) {
                         if (!value.trim()) return 'Last name is required.';
@@ -298,12 +301,25 @@
 
             attachListeners();
 
+            // Override the original zf_ValidateAndSubmit function if it exists
+            window.zf_ValidateAndSubmit = function() {
+                return validateAllRequired();
+            };
+
             form.addEventListener('submit', function (event) {
-                if (!validateAllRequired()) {
+                var isValid = validateAllRequired();
+                if (!isValid) {
                     event.preventDefault();
+                    event.stopPropagation();
+                    // Scroll to first error
+                    var firstError = form.querySelector('.zf-errorMessage[style*="display: block"]');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
                     return false;
                 }
-            }, true);
+                return true;
+            }, false);
         })();
     </script>
 </body>
