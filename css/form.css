@@ -1552,7 +1552,7 @@ font-family: 'Poppins', sans-serif;
 .zfthreeColumn {
   display: flex;
   flex-wrap: nowrap;
-  gap: 24px;
+  gap: 15px;
 }
 .zfoneColumn .zfCol {
   max-width: 100%;
@@ -1974,28 +1974,78 @@ em {
   margin-left: 8px !important;
 }
 
-@media (max-width: 768px) {
-  /* Ensure consistent vertical spacing between all form fields */
-  .zf-tempFrmWrapper {
-    padding: 16px 0 0 !important;
   }
-  
-  /* Add consistent bottom margin to grid columns in mobile */
+  /* === MOBILE VERTICAL SPACING RESET === */
+@media (max-width: 768px) {
+  /* Stack columns */
+  .zftwoColumn,
+  .zfthreeColumn {
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+  }
+
   .zftwoColumn .zfCol,
   .zfthreeColumn .zfCol {
-    margin-bottom: 0 !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+    margin: 0 !important;         /* no extra gap inside the group */
   }
-  
-  /* Ensure grid wrapper fields have same spacing as regular fields */
-  .zfgrid_Wrapper {
+
+  /* Every field block wrapper: same internal padding, no margins */
+  .zf-tempFrmWrapper {
+    padding: 12px 0 0 !important;
     margin: 0 !important;
   }
-  
-  /* Fix the specific spacing issue between name fields and other fields */
-  .zfgrid_Wrapper + .zfgrid_Wrapper,
-  .zfgrid_Wrapper + .zf-tempFrmWrapper {
-    margin-top: 0 !important;
+
+  /* Grid wrappers themselves should NOT add vertical space */
+  .zfgrid_Wrapper,
+  .zfgridWrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Labels and controls full width */
+  .zf-tempContDiv,
+  .zf-labelName,
+  .zf-form-sBox,
+  .zf-phwrapper,
+  .zf-tempContDiv input,
+  .zf-tempContDiv textarea {
+    width: 100% !important;
   }
 }
+
+
+
+
+.zf-tempFrmWrapper + .zf-tempFrmWrapper,
+.zfgrid_Wrapper + .zf-tempFrmWrapper,
+.zf-tempFrmWrapper + .zfgrid_Wrapper,
+.zfgrid_Wrapper + .zfgrid_Wrapper {
+  margin-top: 16px !important;   
 }
 
+.zftwoColumn .zfCol {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+
+.zf-tempFrmWrapper {
+  margin-bottom: 16px !important;   
+}
+
+
+.zf-name.zf-namelarge + .zfgrid_Wrapper {
+  margin-top: 16px !important;     
+}
+
+@media (max-width: 768px) {
+  
+  .zf-tempFrmWrapper:nth-of-type(4) {
+    margin-bottom: 24px !important;  
+  }
+}
+#sub{
+  margin-top: 32px!important;
+}
