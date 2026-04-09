@@ -89,21 +89,7 @@ body {
   font-family: 'Poppins', sans-serif;
   background-attachment: fixed;
   margin: 0 auto;
-  overflow-y: auto;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-body::-webkit-scrollbar,
-iframe::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-
-iframe {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
+} 
 
 input,
 input[type="text"],
@@ -2062,4 +2048,24 @@ em {
 }
 #sub{
   margin-top: 32px!important;
+}
+/* Hide scrollbar but keep scrolling */
+html {
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
