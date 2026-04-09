@@ -89,7 +89,21 @@ body {
   font-family: 'Poppins', sans-serif;
   background-attachment: fixed;
   margin: 0 auto;
-} 
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar,
+iframe::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+iframe {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 
 input,
 input[type="text"],
